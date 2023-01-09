@@ -1,6 +1,7 @@
 package de.neuefische.mongodbdemo;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public class PetService {
     }
 
     public List<Pet> getAll () {
+        System.out.println("Mein Log: " + mongoUri);
         return petRepository.findAll();
     }
 
@@ -26,4 +28,8 @@ public class PetService {
     public void delete (String id) {
         petRepository.deleteById(id);
     }
+
+    //
+    @Value("${spring.data.mongodb.uri}")
+    public String mongoUri;
 }
